@@ -1,10 +1,10 @@
 import pygame
 import sys
-
+from settings import *
 
 
 class Game:
-    def__init__(self):
+    def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode((800, 800))
         self.clock = pygame.time.Clock()
@@ -24,3 +24,5 @@ class Game:
 if __name__ == '__main__':
     game = Game()
     game.run()
+
+
