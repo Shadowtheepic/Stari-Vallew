@@ -1,11 +1,15 @@
 import pygame
 import sys
 from settings import *
+from level import Level
+
+
 
 
 class Game:
     def __init__(self):
         pygame.init()
+        self.level = Level()
         self.screen = pygame.display.set_mode((800, 800))
         self.clock = pygame.time.Clock()
     
@@ -16,7 +20,8 @@ class Game:
                     pygame.quit()
                     sys.exit()
                 
-                dt = self.clocl.tick()/1000
+                dt = self.clock.tick()/1000
+                self.level.run(dt)
                 pygame.display.update()
 
 
@@ -24,5 +29,3 @@ class Game:
 if __name__ == '__main__':
     game = Game()
     game.run()
-
-
