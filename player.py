@@ -1,5 +1,6 @@
 import pygame
 from settings import *
+from support import *
 
 class Player(pygame.sprite.Sprite):
     def __init__ (self, pos, group):
@@ -57,3 +58,4 @@ class Player(pygame.sprite.Sprite):
         for animation in self.animations.keys():
             full_path = '../graphics/character/' + animation
             self.animations[animation] = import_folder(full_path)
+
