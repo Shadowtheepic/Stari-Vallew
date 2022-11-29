@@ -47,3 +47,13 @@ class Player(pygame.sprite.Sprite):
     def update(self,dt):
         self.input()
         self.move(dt)
+    
+    def import_assets(self):
+        self.animations = {'up':[],'down':[], 'left':[], 'right':[],
+                           'up_idle':[],'down_idle':[], 'left_idle':[], 'right_idle':[],
+                           'up_hoe':[],'down_hoe':[], 'left_hoe':[], 'right_hoe':[],
+                           'up_axe':[],'down_axe':[], 'left_axe':[], 'right_axe':[],
+                           'up_water':[],'down_water':[], 'left_water':[], 'right_water':[]}
+        for animation in self.animations.keys():
+            full_path = '../graphics/character/' + animation
+            self.animations[animation] = import_folder(full_path)
