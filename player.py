@@ -34,7 +34,7 @@ class Player(pygame.sprite.Sprite):
         else:
             self.direction.x = 0
         
-        print(self.direction)
+        #print(self.direction) used to test
         
     def import_assets(self):
         self.animations = {'up':[],'down':[], 'left':[], 'right':[],
@@ -45,6 +45,7 @@ class Player(pygame.sprite.Sprite):
         for animation in self.animations.keys():
             full_path = '../stardew-main/character/' + animation
             self.animations[animation] = import_folder(full_path)
+        print(self.animations)
     
     def move(self, dt):
         if self.direction.magnitude() > 0:
