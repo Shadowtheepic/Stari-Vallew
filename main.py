@@ -9,8 +9,9 @@ from level import Level
 class Game:
     def __init__(self):
         pygame.init()
-        self.level = Level()
+        
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.level = Level() #MO: this was the problem! you have to define your screen mode before you call anything that uses it (like convert alpha)
         self.clock = pygame.time.Clock()
     
     def run(self):
@@ -29,3 +30,4 @@ class Game:
 if __name__ == '__main__':
     game = Game()
     game.run()
+
