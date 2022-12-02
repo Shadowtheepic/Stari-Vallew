@@ -51,35 +51,44 @@ class Player(pygame.sprite.Sprite):
     
     def input(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_UP]:
-            self.direction.y = -1
-            self.status = "up"
-        elif keys[pygame.K_DOWN]:
-            self.direction.y = 1
-            self.status = "down"
-        else:
-            self.direction.y = 0
+        if not self.timers['tool use'].active:
+            if keys[pygame.K_UP]:
+                self.direction.y = -1
+                self.status = "up"
+            elif keys[pygame.K_DOWN]:
+                self.direction.y = 1
+                self.status = "down"
+            else:
+              self.direction.y = 0
+
+            if keys[pygame.K_LEFT]:
+                self.direction.x = -1
+                self.status = "left"
+            elif keys[pygame.K_RIGHT]:
+                self.direction.x = 1
+                self.status = "right"
+            else:
+              self.direction.x = 0
+
+        #tool use
+            if keys[pygame.K_SPACE]:
+                self.timers['tool use'].activate()
+                self.direction = pygame.math.Vector2()
         
-        if keys[pygame.K_LEFT]:
-            self.direction.x = -1
-            self.status = "left"
-        elif keys[pygame.K_RIGHT]:
-            self.direction.x = 1
-            self.status = "right"
-        else:
-            self.direction.x = 0
-        
-        #print(self.direction) used to test
     
     def get_status(self):
         if self.direction.magnitude() == 0:
             self.status = self.status.split("_")[0] + "_idle"
         
         #tool use
-            if self.timers['tool use'].activate:
+            if self.timers['tool use'].active:
                 print("tool is being used")
+                self.status = self.status.split("_")[0] + "_" + self.selected_tool
         
-    
+    def update_timers(self):
+        for timer in self.timers.values():
+            timer.update()
+            
     
     def move(self, dt):
         if self.direction.magnitude() > 0:
@@ -96,5 +105,6 @@ class Player(pygame.sprite.Sprite):
     def update(self,dt):
         self.input()
         self.get_status()
+        self.update_timers()
         self.move(dt)
         self.animate(dt)
