@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
         }
         
          #tools
-        self.selected_tool = "axe"
+        self.selected_tool = "water"
     
     def use_tool(self):
         print(self.selected_tool)
@@ -74,6 +74,7 @@ class Player(pygame.sprite.Sprite):
             if keys[pygame.K_SPACE]:
                 self.timers['tool use'].activate()
                 self.direction = pygame.math.Vector2()
+                self.frame_index = 0
         
     
     def get_status(self):
@@ -108,3 +109,4 @@ class Player(pygame.sprite.Sprite):
         self.update_timers()
         self.move(dt)
         self.animate(dt)
+
